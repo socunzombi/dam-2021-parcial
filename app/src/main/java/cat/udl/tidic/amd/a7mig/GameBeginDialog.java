@@ -88,6 +88,7 @@ public class GameBeginDialog extends DialogFragment {
             Log.d(TAG, "noms:"+ noms.toString());
             Log.d(TAG, "apostes:"+ apostes.toString());
         }
+
         dismiss();
     }
 
