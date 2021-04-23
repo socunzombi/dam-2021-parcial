@@ -30,6 +30,17 @@ public class GameBeginDialog extends DialogFragment {
     private View rootView;
     private GameActivity activity;
 
+    private List <String> noms;
+    private List <Integer> apostes;
+
+    public List<String> getNoms() {
+        return noms;
+    }
+
+    public List<Integer> getApostes() {
+        return apostes;
+    }
+
     public static GameBeginDialog newInstance(GameActivity activity) {
         GameBeginDialog dialog = new GameBeginDialog();
         dialog.activity = activity;
@@ -78,18 +89,33 @@ public class GameBeginDialog extends DialogFragment {
         List<String> noms = new ArrayList<>();
         List<Integer> apostes = new ArrayList<>();
 
+        boolean ok = true;
+
         for (int i = 0; i < jugadores; i++) {
             EditText editText = gameSettingLayout.findViewById(20000+i);
             String value = editText.getText().toString();
             String nom = value.split(";")[0];
             int aposta = Integer.parseInt(value.split(";")[1]);
-            noms.add(i,nom);
-            apostes.add(i,aposta);
+
+            if (Validator.isValid (nom, aposta)) {
+                noms.add(i, nom);
+                apostes.add(i, aposta);
+            } else {
+                editText.setError("Cadena Errònea");
+                ok = false;
+            }
+
             Log.d(TAG, "noms:"+ noms.toString());
             Log.d(TAG, "apostes:"+ apostes.toString());
         }
 
-        dismiss();
+        if (ok) {
+            this.apostes = apostes;
+            this.noms = noms;
+            dismiss();
+
+            activity.iniciPartida(this.noms, this.apostes);
+        }
     }
 
 
