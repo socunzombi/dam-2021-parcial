@@ -14,11 +14,11 @@ public class Partida {
         baraja.barajar();
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
+    public void setJugadores (List <Jugador> jugadores) {
         this.jugadores = jugadores;
     }
 
-    public List<Jugador> getJugadores() {
+    public List <Jugador> getJugadores() {
         return jugadores;
     }
 

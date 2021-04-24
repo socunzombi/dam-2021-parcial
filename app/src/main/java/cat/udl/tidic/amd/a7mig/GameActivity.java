@@ -24,8 +24,6 @@ public class GameActivity extends AppCompatActivity {
 
     public GameViewModel gameViewModel;
 
-    Partida partida;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
     public void initView(){
 
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        //activityMainBinding.setLifecycleOwner(this);
+        activityMainBinding.setLifecycleOwner(this);
         gameViewModel = new GameViewModel();
         activityMainBinding.setViewModel(gameViewModel);
 
@@ -60,15 +58,17 @@ public class GameActivity extends AppCompatActivity {
 
     protected void iniciPartida(List <String> noms, List <Integer> aposta) {
 
-        partida = new Partida ();
         List <Jugador> jugadores = new ArrayList<>();
 
         for (int i = 0; i < noms.size(); i++) {
             jugadores.add(new Jugador(noms.get(i), aposta.get(i)));
         }
 
+        Partida partida = new Partida();
         partida.setJugadores(jugadores);
-        gameViewModel.currentPlayer.setValue(jugadores.get(0));
+
+        gameViewModel.partida.setValue(partida);
+        gameViewModel.current.setValue(0);
     }
 
 }

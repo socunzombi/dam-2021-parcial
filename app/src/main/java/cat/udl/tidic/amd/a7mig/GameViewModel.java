@@ -10,11 +10,18 @@ public class GameViewModel extends ViewModel {
 
     private final String TAG = "GameVM";
 
-    public MutableLiveData <Jugador> currentPlayer = new MutableLiveData<>();
-
-    public MutableLiveData <String> nom () {return new MutableLiveData <String> ().setValue(currentPlayer.getValue().getNombre());}
+    public MutableLiveData <Partida> partida = new MutableLiveData<>();
+    public MutableLiveData <Integer> current = new MutableLiveData<>();
 
     public GameViewModel () {}
+
+    public void seguir () {
+        partida.getValue().cogerCarta();
+    }
+
+    public void plantarse () {
+        // TODO : al plantar-se
+    }
 
 
 }
