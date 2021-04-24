@@ -9,9 +9,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import cat.udl.tidic.amd.a7mig.databinding.ActivityMainBinding;
+import cat.udl.tidic.amd.a7mig.models.Jugador;
+import cat.udl.tidic.amd.a7mig.models.Partida;
 
 
 public class GameActivity extends AppCompatActivity {
@@ -21,16 +24,12 @@ public class GameActivity extends AppCompatActivity {
 
     public GameViewModel gameViewModel;
 
-    MutableLiveData <List <String>> noms;
-    MutableLiveData <List <Integer>> apostes;
+    Partida partida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        noms = new MutableLiveData<>();
-        apostes = new MutableLiveData<>();
 
         initView();
     }
@@ -38,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
     public void initView(){
 
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        activityMainBinding.setLifecycleOwner(this);
+        //activityMainBinding.setLifecycleOwner(this);
         gameViewModel = new GameViewModel();
         activityMainBinding.setViewModel(gameViewModel);
 
@@ -59,9 +58,17 @@ public class GameActivity extends AppCompatActivity {
         dialog.show(getSupportFragmentManager(), GAME_END_DIALOG_TAG);
     }
 
-    protected void iniciPartida(List <String> n, List <Integer> i) {
-        noms.setValue(n);
-        apostes.setValue(i);
+    protected void iniciPartida(List <String> noms, List <Integer> aposta) {
+
+        partida = new Partida ();
+        List <Jugador> jugadores = new ArrayList<>();
+
+        for (int i = 0; i < noms.size(); i++) {
+            jugadores.add(new Jugador(noms.get(i), aposta.get(i)));
+        }
+
+        partida.setJugadores(jugadores);
+        gameViewModel.currentPlayer.setValue(jugadores.get(0));
     }
 
 }

@@ -30,17 +30,6 @@ public class GameBeginDialog extends DialogFragment {
     private View rootView;
     private GameActivity activity;
 
-    private List <String> noms;
-    private List <Integer> apostes;
-
-    public List<String> getNoms() {
-        return noms;
-    }
-
-    public List<Integer> getApostes() {
-        return apostes;
-    }
-
     public static GameBeginDialog newInstance(GameActivity activity) {
         GameBeginDialog dialog = new GameBeginDialog();
         dialog.activity = activity;
@@ -110,11 +99,8 @@ public class GameBeginDialog extends DialogFragment {
         }
 
         if (ok) {
-            this.apostes = apostes;
-            this.noms = noms;
             dismiss();
-
-            activity.iniciPartida(this.noms, this.apostes);
+            activity.iniciPartida(noms, apostes);
         }
     }
 
