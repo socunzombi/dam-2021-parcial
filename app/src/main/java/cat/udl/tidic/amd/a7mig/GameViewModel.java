@@ -20,7 +20,9 @@ public class GameViewModel extends ViewModel {
     }
 
     public void plantarse () {
-        // TODO : al plantar-se
+        if (partida.getValue().getJugadores().size() -1 == current.getValue()) {
+            //GameActivity.finalPartida();
+        }
     }
 
 
