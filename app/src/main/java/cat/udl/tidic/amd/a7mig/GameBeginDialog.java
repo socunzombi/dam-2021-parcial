@@ -93,9 +93,6 @@ public class GameBeginDialog extends DialogFragment {
                 editText.setError("Cadena Errònea");
                 ok = false;
             }
-
-            Log.d(TAG, "noms:"+ noms.toString());
-            Log.d(TAG, "apostes:"+ apostes.toString());
         }
 
         if (ok) {
