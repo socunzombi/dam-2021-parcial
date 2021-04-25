@@ -41,6 +41,12 @@ public class GameActivity extends AppCompatActivity {
         gameViewModel = new GameViewModel();
         activityMainBinding.setViewModel(gameViewModel);
 
+        gameViewModel.finalPartida.observe(this, finalpartida -> {
+            if (finalpartida) {
+                finalPartida();
+            }
+        });
+
         promptForPlayer();
 
     }
@@ -52,8 +58,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void finalPartida(){
-        GameEndDialog dialog = GameEndDialog.newInstance(this,
-                new ArrayList<>());
+        GameEndDialog dialog = GameEndDialog.newInstance(this, gameViewModel.partida.getValue().getJugadores());
         dialog.setCancelable(false);
         dialog.show(getSupportFragmentManager(), GAME_END_DIALOG_TAG);
     }

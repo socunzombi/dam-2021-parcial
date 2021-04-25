@@ -61,6 +61,15 @@ public class GameEndDialog extends DialogFragment {
             TextView resum = new EditText(rootView.getContext());
             resum.setText(j.toString());
             gameEndLayout.addView(resum);
+
+            if (j.getPuntuacion().getValue() > 7.5) {
+                PreferenceProvider.providePreferences().edit().putInt("banca",
+                        PreferenceProvider.providePreferences().getInt("banca", -1) + j.getApuesta().getValue()).apply();
+            }
+            if (j.getPuntuacion().getValue() == 7.5) {
+                PreferenceProvider.providePreferences().edit().putInt("banca",
+                        PreferenceProvider.providePreferences().getInt("banca", -1) - (j.getApuesta().getValue()*2)).apply();
+            }
         }
 
         TextView resum = new EditText(rootView.getContext());

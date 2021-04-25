@@ -1,8 +1,12 @@
 package cat.udl.tidic.amd.a7mig.models;
 
+import android.preference.PreferenceManager;
+
 import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
+
+import cat.udl.tidic.amd.a7mig.preferences.PreferenceProvider;
 
 
 public class Jugador {
@@ -42,11 +46,11 @@ public class Jugador {
     @Override
     public String toString(){
         if (this.puntuacion.getValue() == 7.5){
-            return this.nombre + " ha guanyat " + this.getApuesta().getValue()*2 + " euros amb una puntuació de " + this.getPuntuacion().getValue();
+            return this.nombre.getValue() + " ha guanyat " + this.getApuesta().getValue()*2 + " euros amb una puntuació de " + this.getPuntuacion().getValue();
         } else if (this.puntuacion.getValue() < 7.5){
-            return this.nombre + " ha perdut " + this.getApuesta().getValue()*0.1 + " euros amb una puntuació de " + this.getPuntuacion().getValue();
+            return this.nombre.getValue() + " ha perdut " + this.getApuesta().getValue()*0.1 + " euros amb una puntuació de " + this.getPuntuacion().getValue();
         } else {
-            return this.nombre + " ha perdut " + this.getApuesta().getValue() + " euros amb una puntuació de " + this.getPuntuacion().getValue();
+            return this.nombre.getValue() + " ha perdut " + this.getApuesta().getValue() + " euros amb una puntuació de " + this.getPuntuacion().getValue();
         }
     }
 
