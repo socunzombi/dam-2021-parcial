@@ -25,11 +25,10 @@ public class GameViewModel extends ViewModel {
     public void seguir () {
         Carta carta = partida.getValue().cogerCarta();
 
-        double suma = carta.getValue() + partida.getValue().getJugadores().get(current.getValue()).getPuntuacion().getValue();
-        partida.getValue().getJugadores().get(current.getValue()).setPuntuacion(suma);
+        partida.getValue().getJugadores().get(current.getValue()).setPuntuacion(carta.getValue() + partida.getValue().getJugadores().get(current.getValue()).getPuntuacion().getValue());
         this.carta.setValue(carta.getResource());
 
-        if (suma > 7.5) {
+        if (partida.getValue().getJugadores().get(current.getValue()).getPuntuacion().getValue() > 7.5) {
             plantarse();
         }
     }
